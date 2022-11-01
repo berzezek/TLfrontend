@@ -7,9 +7,9 @@
       <div class="row-fluid">
         <left-side
           :categories="categories"
-          :subcategories="subcategories"
-          @changeSubCategories="changeSubCategories"
+          @changeCategories="changeCategories"
           @changeEmployees="changeEmployees"
+          @backCategories="backCategories"
         />
         <right-side :employees="employees" @removeEmployee="removeEmployee" />
       </div>
@@ -24,8 +24,7 @@ import RightSide from "@/views/RightSide.vue";
 import MainFooter from "@/views/MainFooter.vue";
 import { useCategoryStore } from "@/stores/category";
 import { useEmployeeStore } from "@/stores/employee";
-import { computed } from "vue";
-import { useSubCategoryStore } from "@/stores/subcategory";
+import { computed, onMounted } from "vue";
 
 export default {
   name: "HomeView",
@@ -36,13 +35,13 @@ export default {
   },
   setup: function () {
     const categoryStore = useCategoryStore();
-    const subCategoryStore = useSubCategoryStore();
     const employeeStore = useEmployeeStore();
     const categories = computed(() => categoryStore.category);
-    const subcategories = computed(() => subCategoryStore.subcategory);
     const employees = computed(() => employeeStore.employee);
-    const changeSubCategories = (value) => {
-      subCategoryStore.fetchSubCategory(value);
+
+    const changeCategories = (value) => {
+      categoryStore.fetchCategory(value);
+      employeeStore.fetchEmployee(value);
     };
     const changeEmployees = (value) => {
       employeeStore.fetchEmployee(value);
@@ -50,13 +49,20 @@ export default {
     const removeEmployee = (value) => {
       employeeStore.removeEmployee(value);
     };
+    const backCategories = (value) => {
+      console.log(value)
+    };
+    onMounted(() => {
+      categoryStore.fetchCategory(null);
+    });
+
     return {
       categories,
-      subcategories,
       employees,
-      changeSubCategories,
       changeEmployees,
       removeEmployee,
+      changeCategories,
+      backCategories,
     };
   },
 };

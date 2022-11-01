@@ -4,17 +4,31 @@
       <ul class="nav nav-list">
         <li class="nav-header">Отделы</li>
         <!--        <li class="active"><a href="#">Link</a></li>-->
-        <li v-for="category in categories" :key="category.id" @click="changeSubCategories(category.id)">
-          {{ category.name }}
-        </li>
-      </ul>
-    </div>
-    <div class="well sidebar-nav">
-      <ul class="nav nav-list">
-        <li class="nav-header">Подразделения</li>
-        <!--        <li class="active"><a href="#">Link</a></li>-->
-        <li v-for="subcategory in subcategories" :key="subcategory.id" @click="changeEmployees(subcategory.id)">
-          {{ subcategory.name }}
+        <li v-for="category in categories" :key="category.id">
+          <div class="category-options">
+            <div>
+              <span
+                @click="
+                  changeCategories(category.id, category.subcategories.length)
+                "
+                >{{ category.name }}</span
+              >
+            </div>
+            <div>
+              <span
+                class="badge badge-info ml-2"
+                v-if="category.subcategories.length"
+              >
+                {{ category.subcategories.length }}
+              </span>
+              <span
+                class="badge badge-success ml-2"
+                @click="backCategories(category.category)"
+              >
+                back
+              </span>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
@@ -29,20 +43,25 @@ export default {
       type: Array,
       required: true,
     },
-    subcategories: {
-      type: Array,
-      required: true,
-    },
   },
   methods: {
-    changeSubCategories(value) {
-      this.$emit("changeSubCategories", value);
+    changeCategories(value, count = 0) {
+      this.$emit("changeCategories", value);
     },
     changeEmployees(value) {
       this.$emit("changeEmployees", value);
+    },
+    backCategories(value) {
+      this.$emit("backCategories", value);
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.category-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>

@@ -1,7 +1,10 @@
 <template>
   <div class="span9">
     <div class="hero-unit">
-      <p>В данном подразделении {{ employees.count }} служащих. Можно изменить данные, нанять нового сотрудника и даже уволить.</p>
+      <p>
+        В данном подразделении {{ employees.count }} служащих. Можно изменить
+        данные, нанять нового сотрудника и даже уволить.
+      </p>
     </div>
     <div class="row-fluid">
       <table class="table table-hover">
@@ -25,11 +28,11 @@
         </tbody>
       </table>
     </div>
-<!--    <main-pagination-->
-<!--      :pages="employees.count / 100"-->
-<!--      :currentPage="1"-->
-<!--      @changePage="changePage"-->
-<!--    />-->
+    <!--    <main-pagination-->
+    <!--      :pages="employees.count / 100"-->
+    <!--      :currentPage="1"-->
+    <!--      @changePage="changePage"-->
+    <!--    />-->
   </div>
 </template>
 
