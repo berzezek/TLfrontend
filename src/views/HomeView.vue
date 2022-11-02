@@ -36,11 +36,11 @@ export default {
   setup: function () {
     const categoryStore = useCategoryStore();
     const employeeStore = useEmployeeStore();
-    const categories = computed(() => categoryStore.category);
+    const categories = computed(() => categoryStore.categories);
     const employees = computed(() => employeeStore.employee);
 
     const changeCategories = (value) => {
-      categoryStore.fetchCategory(value);
+      categoryStore.fetchCategories(value);
       employeeStore.fetchEmployee(value);
     };
     const changeEmployees = (value) => {
@@ -53,7 +53,9 @@ export default {
       console.log(value)
     };
     onMounted(() => {
-      categoryStore.fetchCategory(null);
+      categoryStore.fetchCategories(1);
+      categoryStore.fetchCategory(1);
+      employeeStore.fetchEmployee(1);
     });
 
     return {
