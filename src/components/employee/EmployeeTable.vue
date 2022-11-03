@@ -32,7 +32,7 @@
     </div>
     <div v-else-if="employees.count === 0">
       <div class="hero-unit">
-        <p>В данном подразделении нет служащих.</p>
+        <p>В данном отделе нет служащих.</p>
       </div>
     </div>
     <div v-else class="block-in-center">
@@ -48,7 +48,7 @@ export default {
   name: "EmployeeTable",
   props: {
     employees: {
-      type: Array,
+      type: Object,
       required: true,
     },
   },

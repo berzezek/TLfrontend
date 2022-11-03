@@ -11,7 +11,7 @@ export default {
   components: { EmployeeTable },
   props: {
     employees: {
-      type: Array,
+      type: Object,
       required: true,
     },
   },

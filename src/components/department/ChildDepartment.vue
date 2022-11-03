@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="text-center">
-      <button class="btn btn-primary" @click="backToLevelUp(department.id)">
+      <button class="btn btn-primary" @click="fetchDepartment(department.head_office)">
         На уровень выше
       </button>
     </div>
@@ -24,9 +24,9 @@
 
 <script>
 import { useDepartmentStore } from "@/stores/department";
-import { computed, ref } from "vue";
-import DepartmentOption from "@/components/department/DepartmentOption.vue";
 import { useEmployeeStore } from "@/stores/employee";
+import DepartmentOption from "@/components/department/DepartmentOption.vue";
+import { computed, ref } from "vue";
 
 export default {
   name: "ChildDepartment",
@@ -42,17 +42,11 @@ export default {
       await departmentStore.fetchDepartments(value);
       await employeeStore.fetchEmployees(value);
     };
-    const backToLevelUp = async (value) => {
-      await departmentStore.fetchDepartment(value);
-      await departmentStore.fetchDepartments(value);
-      await employeeStore.fetchEmployees(value);
-    };
     return {
       departments,
-      fetchDepartment,
-      backToLevelUp,
-      isHovering,
       department,
+      fetchDepartment,
+      isHovering,
     };
   },
 };

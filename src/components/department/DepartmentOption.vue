@@ -1,14 +1,11 @@
 <template>
   <div
+    @click="fetchDetails(department.id)"
     @mouseover="showOptions = true"
     @mouseout="showOptions = false"
     :class="{ 'department-options-hover': showOptions }"
   >
-    <div>
-      <span @click="fetchDetails(department.id)"
-        >{{ department.name }} &nbsp;&nbsp;</span
-      >
-    </div>
+    <span>{{ department.name }}</span>
   </div>
   <hr />
 </template>

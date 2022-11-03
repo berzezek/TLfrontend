@@ -6,7 +6,7 @@
       <br />
       <div class="row-fluid">
         <left-side
-          :categories="categories"
+          :departments="departments"
           @changeCategories="changeCategories"
           @changeEmployees="changeEmployees"
           @backCategories="backCategories"

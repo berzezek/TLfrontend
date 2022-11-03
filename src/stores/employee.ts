@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-type TypeEmployee = {
+interface IEmployee {
   id: number;
   name: string;
   salary: number;
@@ -9,7 +9,7 @@ type TypeEmployee = {
 };
 
 export const useEmployeeStore = defineStore("employee", () => {
-  const employees = ref([] as Array<TypeEmployee>),
+  const employees = ref([] as Array<IEmployee>),
     fetchEmployees = async (id: string) => {
       const response = await fetch(
         `http://localhost:8000/api/v1/department/${id}/employee/`
