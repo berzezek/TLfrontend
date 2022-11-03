@@ -22,7 +22,7 @@
 import LeftSide from "@/views/LeftSide.vue";
 import RightSide from "@/views/RightSide.vue";
 import MainFooter from "@/views/MainFooter.vue";
-import { useCategoryStore } from "@/stores/category";
+import { useDepartmentStore } from "@/stores/department";
 import { useEmployeeStore } from "@/stores/employee";
 import { computed, onMounted } from "vue";
 
@@ -34,30 +34,30 @@ export default {
     MainFooter,
   },
   setup: function () {
-    const categoryStore = useCategoryStore();
+    const departmentStore = useDepartmentStore();
     const employeeStore = useEmployeeStore();
-    const categories = computed(() => categoryStore.category);
-    const employees = computed(() => employeeStore.employee);
+    const departments = computed(() => departmentStore.departments);
+    const employees = computed(() => employeeStore.employees);
 
     const changeCategories = (value) => {
-      categoryStore.fetchCategory(value);
-      employeeStore.fetchEmployee(value);
+      departmentStore.fetchDepartments(value);
+      employeeStore.fetchEmployees(value);
     };
     const changeEmployees = (value) => {
-      employeeStore.fetchEmployee(value);
+      employeeStore.fetchEmployees(value);
     };
     const removeEmployee = (value) => {
       employeeStore.removeEmployee(value);
     };
     const backCategories = (value) => {
-      console.log(value)
+      console.log(value);
     };
     onMounted(() => {
-      categoryStore.fetchCategory(null);
+      departmentStore.fetchDepartment(1);
     });
 
     return {
-      categories,
+      departments,
       employees,
       changeEmployees,
       removeEmployee,
