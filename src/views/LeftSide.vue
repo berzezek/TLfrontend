@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import ParentDepartment from "@/components/ParentDepartment.vue";
-import ChildDepartment from "@/components/ChildDepartment.vue";
+import ParentDepartment from "@/components/department/ParentDepartment.vue";
+import ChildDepartment from "@/components/department/ChildDepartment.vue";
 export default {
   name: "LeftSide",
   components: { ParentDepartment, ChildDepartment },

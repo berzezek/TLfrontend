@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import EmployeeTable from "@/components/EmployeeTable.vue";
+import EmployeeTable from "@/components/employee/EmployeeTable.vue";
 export default {
   name: "RightSide",
   components: { EmployeeTable },
