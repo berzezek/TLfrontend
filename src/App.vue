@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import MainHeader from "@/views/MainHeader.vue";
+import MainFooter from "@/views/MainFooter.vue";
 
 </script>
 
@@ -7,5 +8,6 @@ import MainHeader from "@/views/MainHeader.vue";
   <div>
     <main-header />
     <RouterView />
+    <main-footer />
   </div>
 </template>

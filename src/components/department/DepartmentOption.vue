@@ -10,12 +10,16 @@
   <hr />
 </template>
 
-<script>
+<script lang="ts">
+interface IDepartment {
+  id: number;
+  name: string;
+}
 export default {
   name: "DepartmentOption",
   props: {
     department: {
-      type: Object,
+      type: Object as () => IDepartment,
       required: true,
     },
   },
@@ -25,7 +29,7 @@ export default {
     };
   },
   methods: {
-    fetchDetails(id) {
+    fetchDetails(id: number) {
       this.$emit("fetchDetails", id);
     },
   },

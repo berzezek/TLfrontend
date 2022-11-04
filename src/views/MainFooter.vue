@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="footer">
     <hr />
     <footer>
-      <p>© Company 2022</p>
+      <p>© Berzezek 2022</p>
     </footer>
   </div>
 </template>
@@ -13,4 +13,14 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+</style>

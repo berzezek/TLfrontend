@@ -6,7 +6,7 @@ interface IEmployee {
   salary: number;
   date_of_issue: string;
   department: number;
-};
+}
 
 export const useEmployeeStore = defineStore("employee", () => {
   const employees = ref([] as Array<IEmployee>),

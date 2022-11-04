@@ -27,7 +27,7 @@ export const useDepartmentStore = defineStore(
         department.value = await response.json();
       },
       departments = ref([] as Array<IDepartment>),
-      fetchDepartments = async (id: string) => {
+      fetchDepartments = async (id: string | undefined) => {
         id = id || "1";
         const response = await fetch(
           `http://localhost:8000/api/v1/department-list/${id}/`

@@ -12,20 +12,31 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { useDepartmentStore } from "@/stores/department";
 import { useEmployeeStore } from "@/stores/employee";
-import { computed } from "vue";
 import DepartmentOption from "@/components/department/DepartmentOption.vue";
+import { computed } from "vue";
+
+interface IDepartmentStore {
+  fetchDepartments: (value: string) => void;
+  fetchDepartment: (value: string) => void;
+  department: Object;
+  departments: Array<Object>;
+}
+interface IEmployeeStore {
+  fetchEmployees: (value: string) => void;
+  employees: Array<Object>;
+}
 
 export default {
   name: "ParentDepartment",
   components: { DepartmentOption },
   setup: function () {
-    const departmentStore = useDepartmentStore();
-    const employeeStore = useEmployeeStore();
+    const departmentStore: IDepartmentStore = useDepartmentStore();
+    const employeeStore: IEmployeeStore = useEmployeeStore();
     const department = computed(() => departmentStore.department);
-    const fetchDepartments = (value) => {
+    const fetchDepartments = (value: string): void => {
       departmentStore.fetchDepartments(value);
       employeeStore.fetchEmployees(value);
     };

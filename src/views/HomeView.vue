@@ -13,7 +13,6 @@
         />
         <right-side :employees="employees" @removeEmployee="removeEmployee" />
       </div>
-      <main-footer />
     </div>
   </div>
 </template>
@@ -21,7 +20,6 @@
 <script>
 import LeftSide from "@/views/LeftSide.vue";
 import RightSide from "@/views/RightSide.vue";
-import MainFooter from "@/views/MainFooter.vue";
 import { useDepartmentStore } from "@/stores/department";
 import { useEmployeeStore } from "@/stores/employee";
 import { computed, onMounted } from "vue";
@@ -31,7 +29,6 @@ export default {
   components: {
     RightSide,
     LeftSide,
-    MainFooter,
   },
   setup: function () {
     const departmentStore = useDepartmentStore();
@@ -53,7 +50,7 @@ export default {
       console.log(value);
     };
     onMounted(() => {
-      departmentStore.fetchDepartment(1);
+      departmentStore.fetchDepartments(1);
     });
 
     return {
@@ -68,4 +65,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
