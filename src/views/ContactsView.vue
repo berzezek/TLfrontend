@@ -1,9 +1,5 @@
 <template>
   <div>
-    // TODO Contact Page
-    <br />
-    <br />
-    <br />
     <div class="hero-unit">
       <table class="table table-hover">
         <thead>
@@ -18,9 +14,11 @@
           <tr>
             <td>Фахритдинов Нуриддин Бадритдинович</td>
             <td><a href="tel:+998977752650">+998 97 775 26 50</a></td>
-            <td> <a href="mailto:wknduz@gmail.com"> wknduz@gmail.com</a></td>
+            <td><a href="mailto:wknduz@gmail.com"> wknduz@gmail.com</a></td>
             <td>
-              <a href="https://github.com/berzezek/TLbase" target="_blank">Git</a>
+              <a href="https://github.com/berzezek/TLbase" target="_blank"
+                >Git</a
+              >
             </td>
           </tr>
         </tbody>

@@ -11,11 +11,10 @@
 </template>
 
 <script lang="ts">
-interface IDepartment {
-  id: number;
-  name: string;
-}
-export default {
+import { ref, defineComponent } from "vue";
+import type { IDepartment } from "@/utils";
+
+export default defineComponent({
   name: "DepartmentOption",
   props: {
     department: {
@@ -23,17 +22,18 @@ export default {
       required: true,
     },
   },
-  data() {
+  emits: ["fetchDetails"],
+  setup(props, { emit }) {
+    const showOptions = ref(false),
+      fetchDetails = (id: string): void => {
+        emit("fetchDetails", id);
+      };
     return {
-      showOptions: false,
+      showOptions,
+      fetchDetails,
     };
   },
-  methods: {
-    fetchDetails(id: number) {
-      this.$emit("fetchDetails", id);
-    },
-  },
-};
+});
 </script>
 
 <style scoped>

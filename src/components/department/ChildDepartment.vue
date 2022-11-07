@@ -30,36 +30,22 @@ import { useDepartmentStore } from "@/stores/department";
 import { useEmployeeStore } from "@/stores/employee";
 import DepartmentOption from "@/components/department/DepartmentOption.vue";
 import { computed, ref } from "vue";
+import type { IDepartmentStore, IEmployeeStore } from "@/utils";
 
-interface IDepartment {
-  id: string;
-  name: string;
-  head_office: string;
-}
-interface IDepartmentStore {
-  fetchDepartments: (value: string) => void;
-  fetchDepartment: (value: string) => void;
-  department: IDepartment;
-  departments: Array<IDepartment>;
-}
-interface IEmployeeStore {
-  fetchEmployees: (value: string) => void;
-  employees: Array<Object>;
-}
 export default {
   name: "ChildDepartment",
   components: { DepartmentOption },
-  setup: function () {
-    const isHovering = ref(false);
-    const departmentStore: IDepartmentStore = useDepartmentStore();
-    const departments = computed(() => departmentStore.departments);
-    const department = computed(() => departmentStore.department);
-    const employeeStore: IEmployeeStore = useEmployeeStore();
-    const fetchDepartment = async (value: string) => {
-      await departmentStore.fetchDepartment(value);
-      await departmentStore.fetchDepartments(value);
-      await employeeStore.fetchEmployees(value);
-    };
+  setup() {
+    const isHovering = ref(false),
+      departmentStore: IDepartmentStore = useDepartmentStore(),
+      employeeStore: IEmployeeStore = useEmployeeStore(),
+      department = computed(() => departmentStore.department),
+      departments = computed(() => departmentStore.departments),
+      fetchDepartment = (value: string): void => {
+        departmentStore.fetchDepartment(value);
+        departmentStore.fetchDepartments(value);
+        employeeStore.fetchEmployees(value);
+      };
     return {
       departments,
       department,

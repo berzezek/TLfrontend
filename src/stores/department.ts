@@ -1,23 +1,11 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-
-interface IDepartment {
-  id: number;
-  name: string;
-  head_office: number | null;
-}
-
-interface IUseDepartmentStore {
-  department: Object;
-  departments: Object[];
-  fetchDepartment: (id: string) => Promise<void>;
-  fetchDepartments: (id: string) => Promise<void>;
-  // removeDepartment: (id: string) => Promise<void>;
-}
+// @ts-ignore
+import type { IDepartment, IDepartmentStore } from "@/utils";
 
 export const useDepartmentStore = defineStore(
   "department",
-  (): IUseDepartmentStore => {
+  (): IDepartmentStore => {
     const department = ref({} as IDepartment),
       fetchDepartment = async (id: string) => {
         id = id || "1";
@@ -37,7 +25,6 @@ export const useDepartmentStore = defineStore(
     return {
       department,
       fetchDepartment,
-      // @ts-ignore
       departments,
       fetchDepartments,
     };
