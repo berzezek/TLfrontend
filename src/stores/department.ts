@@ -1,43 +1,41 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-
-interface IDepartment {
-  id: number;
-  name: string;
-  head_office: number | null;
-}
-
-interface IUseDepartmentStore {
-  department: Object;
-  departments: Object[];
-  fetchDepartment: (id: string) => Promise<void>;
-  fetchDepartments: (id: string) => Promise<void>;
-  // removeDepartment: (id: string) => Promise<void>;
-}
+// @ts-ignore
+import type { IDepartment, IDepartmentStore } from "@/utils";
 
 export const useDepartmentStore = defineStore(
   "department",
-  (): IUseDepartmentStore => {
+  (): IDepartmentStore => {
     const department = ref({} as IDepartment),
-      fetchDepartment = async (id: string) => {
-        id = id || "1";
+      fetchDepartment = async (id: string | null) => {
+      let fetch_url: string;
+        if (id) {
+          fetch_url = `http://localhost:8000/api/v1/department/${id}`;
+        } else {
+          fetch_url = `http://localhost:8000/api/v1/department/`;
+        }
         const response = await fetch(
-          `http://localhost:8000/api/v1/department/${id}/`
+          fetch_url
         );
         department.value = await response.json();
       },
       departments = ref([] as Array<IDepartment>),
-      fetchDepartments = async (id: string) => {
-        id = id || "1";
+      fetchDepartments = async (id: string | undefined) => {
+        let fetch_url: string;
+        if (id) {
+          fetch_url = `http://localhost:8000/api/v1/department-list/${id}/`
+        } else {
+          fetch_url = `http://localhost:8000/api/v1/department-list/`
+        }
         const response = await fetch(
-          `http://localhost:8000/api/v1/department-list/${id}/`
+          fetch_url
         );
         departments.value = await response.json();
       };
+
     return {
       department,
       fetchDepartment,
-      // @ts-ignore
       departments,
       fetchDepartments,
     };

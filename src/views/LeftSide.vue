@@ -1,16 +1,14 @@
 <template>
   <div class="span3">
-    <parent-department />
-    <child-department />
+    <base-departments />
   </div>
 </template>
 
 <script>
-import ParentDepartment from "@/components/department/ParentDepartment.vue";
-import ChildDepartment from "@/components/department/ChildDepartment.vue";
+import BaseDepartments from "@/components/department/BaseDepartaments.vue";
 export default {
   name: "LeftSide",
-  components: { ParentDepartment, ChildDepartment },
+  components: { BaseDepartments },
 };
 </script>
 

@@ -1,37 +1,44 @@
 <template>
   <div class="well sidebar-nav">
     <ul class="nav nav-list">
-      <li class="nav-header">{{ deparmentTitle }}</li>
-      <!--        <li class="active"><a href="#">Link</a></li>-->
-      <li v-for="deparment in departments" :key="deparment.id" @click="changeDepartment(deparment.id)" class="department">
-        <span>{{ deparment.name }}</span> <span class="badge badge-info" @click="removeDepartment(deparment.id)">Удалить</span>
+      <li class="nav-header">{{ departmentTitle }}</li>
+      <li v-for="department in departments" :key="department.id" @click="changeDepartment(department.id)" class="department">
+        <span>{{ department.name }}</span> <span class="badge badge-info" @click="removeDepartment(department.id)">Удалить</span>
       </li>
     </ul>
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+import type { IDepartments } from "@/utils";
+
+export default defineComponent({
   name: "DepartmentDetail",
   props: {
-    deparmentTitle: {
+    departmentTitle: {
       type: String,
       required: true,
     },
     departments: {
-      type: Array,
+      type: Array as IDepartments,
       required: true,
     },
   },
-  methods: {
-    changeDepartment(value) {
-      this.$emit("changeDepartment", value);
-    },
-    removeDepartment(value) {
-      this.$emit("removeDepartment", value);
-    },
+  emits: ["changeDepartment", "removeDepartment"],
+  setup(props, { emit }) {
+    const changeDepartment = (id: string): void => {
+      emit("changeDepartment", id);
+    };
+    const removeDepartment = (id: string): void => {
+      emit("removeDepartment", id);
+    };
+    return {
+      changeDepartment,
+      removeDepartment,
+    };
   },
-}
+});
 </script>
 
 <style scoped>

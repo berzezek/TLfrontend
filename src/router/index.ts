@@ -18,6 +18,11 @@ const router = createRouter({
       name: "contacts",
       component: () => import("../views/ContactsView.vue"),
     },
+    {
+      path: "/open-api",
+      name: "open-api",
+      component: () => import("../views/OpenApiview.vue"),
+    },
   ],
 });
 

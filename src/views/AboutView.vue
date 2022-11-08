@@ -1,9 +1,5 @@
 <template>
   <div>
-    // TODO About Page
-    <br />
-    <br />
-    <br />
     <div class="hero-unit">
       <h2 class="text-center">Описание задачи</h2>
 <pre>

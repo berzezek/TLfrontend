@@ -10,26 +10,30 @@
   <hr />
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { ref, defineComponent } from "vue";
+import type { IDepartment } from "@/utils";
+
+export default defineComponent({
   name: "DepartmentOption",
   props: {
     department: {
-      type: Object,
+      type: Object as () => IDepartment,
       required: true,
     },
   },
-  data() {
+  emits: ["fetchDetails"],
+  setup(props, { emit }) {
+    const showOptions = ref(false),
+      fetchDetails = (id: string): void => {
+        emit("fetchDetails", id);
+      };
     return {
-      showOptions: false,
+      showOptions,
+      fetchDetails,
     };
   },
-  methods: {
-    fetchDetails(id) {
-      this.$emit("fetchDetails", id);
-    },
-  },
-};
+});
 </script>
 
 <style scoped>

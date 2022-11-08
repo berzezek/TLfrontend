@@ -1,37 +1,30 @@
 <template>
-  <div class="well sidebar-nav">
+  <div class="well sidebar-nav" v-if="department.name">
     <ul class="nav nav-list">
       <li class="nav-header">Головной отдел</li>
       <li>
         <department-option
           :department="department"
-          @fetchDetails="fetchDepartments"
         />
       </li>
     </ul>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { useDepartmentStore } from "@/stores/department";
-import { useEmployeeStore } from "@/stores/employee";
-import { computed } from "vue";
 import DepartmentOption from "@/components/department/DepartmentOption.vue";
+import { computed } from "vue";
+import type { IDepartmentStore } from "@/utils";
 
 export default {
   name: "ParentDepartment",
   components: { DepartmentOption },
   setup: function () {
-    const departmentStore = useDepartmentStore();
-    const employeeStore = useEmployeeStore();
-    const department = computed(() => departmentStore.department);
-    const fetchDepartments = (value) => {
-      departmentStore.fetchDepartments(value);
-      employeeStore.fetchEmployees(value);
-    };
+    const departmentStore: IDepartmentStore = useDepartmentStore(),
+      department = computed(() => departmentStore.department);
     return {
       department,
-      fetchDepartments,
     };
   },
 };
