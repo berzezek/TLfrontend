@@ -1,26 +1,18 @@
 <template>
   <div>
     <div class="well sidebar-nav">
-      <ul class="nav nav-list" v-if="departments.length">
+      <ul class="nav nav-list">
         <li class="nav-header">Подразделения</li>
         <li v-for="department in departments" :key="department.id">
           <department-option
             :department="department"
-            @fetchDetails="fetchDepartment"
+            @fetchDetails="fetchParentDepartment"
           />
         </li>
       </ul>
-      <ul class="nav nav-list" v-else>
-        <li class="nav-header">Подразделений нет</li>
-      </ul>
-      <div class="text-center" v-if="department.head_office !== null" v-cloak>
-        <button
-          class="btn btn-primary"
-          @click="fetchDepartment(department.head_office)"
-        >
-          На уровень выше
-        </button>
-      </div>
+    </div>
+    <div class="block-in-center">
+      <button class="btn btn-primary" @click="levelUp">На уровень выше</button>
     </div>
   </div>
 </template>
@@ -29,39 +21,41 @@
 import { useDepartmentStore } from "@/stores/department";
 import { useEmployeeStore } from "@/stores/employee";
 import DepartmentOption from "@/components/department/DepartmentOption.vue";
-import { computed, ref } from "vue";
+import { computed, onMounted } from "vue";
 import type { IDepartmentStore, IEmployeeStore } from "@/utils";
 
 export default {
-  name: "ChildDepartment",
+  name: "BaseDepartments",
   components: { DepartmentOption },
-  setup() {
-    const isHovering = ref(false),
-      departmentStore: IDepartmentStore = useDepartmentStore(),
+  setup: function () {
+    let headOffice: string;
+    const departmentStore: IDepartmentStore = useDepartmentStore(),
       employeeStore: IEmployeeStore = useEmployeeStore(),
-      department = computed(() => departmentStore.department),
       departments = computed(() => departmentStore.departments),
-      fetchDepartment = (value: string): void => {
+      fetchParentDepartment = (value: string | null): void => {
         departmentStore.fetchDepartment(value);
         departmentStore.fetchDepartments(value);
         employeeStore.fetchEmployees(value);
+      },
+      levelUp = (): void => {
+        headOffice = departmentStore.department.head_office;
+        fetchParentDepartment(headOffice);
+        if (headOffice !== null) {
+          employeeStore.fetchEmployees(headOffice);
+        } else {
+          employeeStore.employees = [];
+        }
       };
+    onMounted(() => {
+      departmentStore.fetchDepartments();
+    });
     return {
       departments,
-      department,
-      isHovering,
-      fetchDepartment,
+      fetchParentDepartment,
+      levelUp,
     };
   },
 };
 </script>
 
-<style scoped>
-.text-center {
-  padding: 20px;
-  text-align: center;
-}
-[v-cloak] {
-  display: none;
-}
-</style>
+<style scoped></style>

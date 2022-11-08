@@ -4,7 +4,7 @@
       <div class="row-fluid">
         <left-side
         />
-        <right-side :employees="employeeList" />
+        <right-side :employees="employees.results" />
       </div>
     </div>
   </div>
@@ -25,13 +25,22 @@ export default {
   },
   setup: function () {
     const employeeStore: IEmployeeStore = useEmployeeStore();
-    const employeeList = computed(() => employeeStore.employeeList);
+    const employees: IEmployees = computed(() => employeeStore.employees);
 
     return {
-      employeeList,
+      employees,
     };
   },
 };
 </script>
 
-<style scoped></style>
+<style>
+
+.block-in-center {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+</style>
