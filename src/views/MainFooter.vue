@@ -1,7 +1,7 @@
 <template>
-  <div class="footer">
+  <div>
     <hr />
-    <footer>
+    <footer class="block-in-center">
       <p>© Berzezek 2022</p>
     </footer>
   </div>
@@ -13,15 +13,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.footer {
-  position: relative;
-  top: 100px;
-  bottom: 0;
-  width: 100%;
-  background-color: #f5f5f5;
-  display: flex;
-  justify-content: center;
-  padding: 40px 0;
-}
-</style>
+<style scoped></style>

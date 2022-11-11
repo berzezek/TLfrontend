@@ -1,39 +1,31 @@
 <template>
-  <div class="span9">
-    <parent-department />
-    <employee-table :employees="employees"/>
-<!--    <div class="observer" ref="observer"></div>-->
+  <div>
+    <div class="span9">
+      <parent-department :department="department" />
+      <employee-table :employees="employees" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import EmployeeTable from "@/components/employee/EmployeeTable.vue";
-import type { IEmployees } from "@/utils";
 import ParentDepartment from "@/components/department/ParentDepartment.vue";
+// @ts-ignore
+import type { IEmployee, IDepartment } from "@/utils";
 
 export default {
   name: "RightSide",
-  components: {ParentDepartment, EmployeeTable },
+  components: { ParentDepartment, EmployeeTable },
   props: {
     employees: {
-      type: Array as IEmployees,
+      type: [] as IEmployee[],
+      required: true,
+    },
+    department: {
+      type: Object as () => IDepartment,
       required: true,
     },
   },
-  // mounted() {
-  //   const options = {
-  //     rootMargin: "0px",
-  //     threshold: 1.0,
-  //   };
-  //   const emplolyeeStore = useEmployeeStore();
-  //   const callback = function (entries, observer) {
-  //     if (entries[0].isIntersecting) {
-  //       emplolyeeStore.fetchEmployees(2);
-  //     }
-  //   };
-  //   const observer = new IntersectionObserver(callback, options);
-  //   observer.observe(this.$refs.observer);
-  // },
 };
 </script>
 

@@ -1,25 +1,24 @@
-import type { PropType } from 'vue';
+import type { PropType } from "vue";
 
-
-interface IDepartment {
+export interface IDepartment {
   id: string;
   name: string;
   head_office: string | null;
 }
-interface IEmployee {
+export interface IEmployee {
   id: number;
   name: string;
   date_of_issue: string;
   salary: number;
   department: string;
 }
-interface IDepartmentStore {
+export interface IDepartmentStore {
   fetchDepartments: (value: string) => Promise<void>;
   fetchDepartment: (value: string) => Promise<void>;
   department: IDepartment;
   departments: Array<IDepartment>;
 }
-interface IEmployeeStore {
+export interface IEmployeeStore {
   fetchEmployees: (value: string) => Promise<void>;
   employees: Array<IEmployee>;
 }

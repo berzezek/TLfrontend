@@ -2,8 +2,16 @@
   <div class="well sidebar-nav">
     <ul class="nav nav-list">
       <li class="nav-header">{{ departmentTitle }}</li>
-      <li v-for="department in departments" :key="department.id" @click="changeDepartment(department.id)" class="department">
-        <span>{{ department.name }}</span> <span class="badge badge-info" @click="removeDepartment(department.id)">Удалить</span>
+      <li
+        v-for="department in departments"
+        :key="department.id"
+        @click="changeDepartment(department.id)"
+        class="department"
+      >
+        <span>{{ department.name }}</span>
+        <span class="badge badge-info" @click="removeDepartment(department.id)"
+          >Удалить</span
+        >
       </li>
     </ul>
   </div>
@@ -11,7 +19,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import type { IDepartments } from "@/utils";
+// @ts-ignore
+import type { IDepartment } from "@/utils";
 
 export default defineComponent({
   name: "DepartmentDetail",
@@ -21,7 +30,7 @@ export default defineComponent({
       required: true,
     },
     departments: {
-      type: Array as IDepartments,
+      type: [] as IDepartment[],
       required: true,
     },
   },

@@ -1,14 +1,16 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "exclude": ["node_modules", "dist", "public", "src/**/*.spec.ts"],
+  "files": ["src/main.ts", "src/shims-tsx.d.ts", "src/shims-vue.d.ts", "src/shims.d.ts"],
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es5",
     "module": "esnext",
     "strict": true,
     "moduleResolution": "node",
     "baseUrl": "http://localhost:8000/",
     "paths": {
-      "@/*": ["./src/*.ts"]
+      "@/*": ["./src/*"]
     }
   },
 

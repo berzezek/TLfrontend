@@ -14,7 +14,7 @@
         <a class="brand" href="#">TL GROUP</a>
         <div>
           <ul class="nav">
-            <li v-for="item in menu" :key="item.id">
+            <li v-for="item in menu" :key="item.path">
               <router-link :to="item.path">{{ item.title }}</router-link>
             </li>
           </ul>
@@ -31,22 +31,18 @@ export default defineComponent({
   setup() {
     const menu = [
       {
-        id: "1",
         title: "Приложение",
         path: "/",
       },
       {
-        id: "2",
-        title: "Open API",
+        title: "API документация",
         path: "/open-api",
       },
       {
-        id: "3",
         title: "О приложении",
         path: "/about",
       },
       {
-        id: "4",
         title: "Контакты",
         path: "/contacts",
       },
@@ -58,12 +54,4 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
-.navbar {
-  top: 0;
-  width: 100%;
-  background-color: #f5f5f5;
-  position: relative;
-  margin-bottom: 50px;
-}
-</style>
+<style scoped></style>

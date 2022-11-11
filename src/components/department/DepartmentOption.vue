@@ -12,6 +12,7 @@
 
 <script lang="ts">
 import { ref, defineComponent } from "vue";
+// @ts-ignore
 import type { IDepartment } from "@/utils";
 
 export default defineComponent({

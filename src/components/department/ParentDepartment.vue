@@ -3,29 +3,24 @@
     <ul class="nav nav-list">
       <li class="nav-header">Головной отдел</li>
       <li>
-        <department-option
-          :department="department"
-        />
+        <department-option :department="department" />
       </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
-import { useDepartmentStore } from "@/stores/department";
 import DepartmentOption from "@/components/department/DepartmentOption.vue";
-import { computed } from "vue";
-import type { IDepartmentStore } from "@/utils";
+import type { IDepartment } from "@/utils";
 
 export default {
   name: "ParentDepartment",
   components: { DepartmentOption },
-  setup: function () {
-    const departmentStore: IDepartmentStore = useDepartmentStore(),
-      department = computed(() => departmentStore.department);
-    return {
-      department,
-    };
+  props: {
+    department: {
+      type: Object as () => IDepartment,
+      required: true,
+    },
   },
 };
 </script>

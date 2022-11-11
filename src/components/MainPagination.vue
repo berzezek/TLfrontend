@@ -27,13 +27,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.my-pagination {
-  display: inline-block;
-  margin: 0 5px;
-}
-.active-page {
-  background-color: #000;
-  color: #fff;
-}
-</style>
+<style scoped></style>
