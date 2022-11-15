@@ -1,9 +1,10 @@
-import type { PropType } from "vue";
-
 export interface IDepartment {
   id: string;
   name: string;
   head_office: string | null;
+}
+export interface IDepartments {
+  departments: IDepartment[];
 }
 export interface IEmployee {
   id: number;
@@ -11,6 +12,12 @@ export interface IEmployee {
   date_of_issue: string;
   salary: number;
   department: string;
+}
+export interface IEmployees {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: IEmployee[];
 }
 export interface IDepartmentStore {
   fetchDepartments: (value: string) => Promise<void>;
@@ -20,34 +27,6 @@ export interface IDepartmentStore {
 }
 export interface IEmployeeStore {
   fetchEmployees: (value: string) => Promise<void>;
+  resetEmployees: () => void;
   employees: Array<IEmployee>;
 }
-
-export default {
-  props: {
-    department: {
-      type: Object as PropType<IDepartment>,
-      required: true,
-    },
-    departments: {
-      type: Array as PropType<Array<IDepartment>>,
-      required: true,
-    },
-    employee: {
-      type: Object as PropType<IEmployee>,
-      required: true,
-    },
-    employees: {
-      type: Array as PropType<Array<IEmployee>>,
-      required: true,
-    },
-    departmentStore: {
-      type: Object as PropType<IDepartmentStore>,
-      required: true,
-    },
-    employeeStore: {
-      type: Object as PropType<IEmployeeStore>,
-      required: true,
-    },
-  },
-};

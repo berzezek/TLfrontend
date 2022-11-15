@@ -1,8 +1,16 @@
 <template>
   <div>
-    <div class="span9">
-      <parent-department :department="department" />
-      <employee-table :employees="employees" />
+    <div v-if="department.id">
+      <div class="hero-unit">
+        <parent-department
+          :department="department"
+          :employeesCount="employeesCount"
+        />
+        <employee-table :employees="employees" :id="department.id"/>
+      </div>
+    </div>
+    <div v-else class="block-in-center">
+      <h3>Выберите отдел</h3>
     </div>
   </div>
 </template>
@@ -23,6 +31,10 @@ export default {
     },
     department: {
       type: Object as () => IDepartment,
+      required: true,
+    },
+    employeesCount: {
+      type: Number,
       required: true,
     },
   },

@@ -4,7 +4,7 @@
   "exclude": ["node_modules", "dist", "public", "src/**/*.spec.ts"],
   "files": ["src/main.ts", "src/shims-tsx.d.ts", "src/shims-vue.d.ts", "src/shims.d.ts"],
   "compilerOptions": {
-    "target": "es5",
+    "target": "esnext",
     "module": "esnext",
     "strict": true,
     "moduleResolution": "node",

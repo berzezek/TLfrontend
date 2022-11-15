@@ -1,9 +1,16 @@
 <template>
-  <div class="well sidebar-nav" v-if="department.name">
+  <div class="">
     <ul class="nav nav-list">
       <li class="nav-header">Головной отдел</li>
+
       <li>
-        <department-option :department="department" />
+        <department-option
+          :department="department"
+          :className="'department-options'"
+        />
+      </li>
+      <li v-if="employeesCount">
+        <span class="muted">Кол-во работников: {{ employeesCount }}</span>
       </li>
     </ul>
   </div>
@@ -11,6 +18,7 @@
 
 <script lang="ts">
 import DepartmentOption from "@/components/department/DepartmentOption.vue";
+// @ts-ignore
 import type { IDepartment } from "@/utils";
 
 export default {
@@ -19,6 +27,10 @@ export default {
   props: {
     department: {
       type: Object as () => IDepartment,
+      required: true,
+    },
+    employeesCount: {
+      type: Number,
       required: true,
     },
   },
