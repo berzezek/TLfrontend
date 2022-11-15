@@ -2,7 +2,11 @@
   <div>
     <div class="container-fluid">
       <div class="row-fluid">
-        <left-side :departments="departments" @levelUp="levelUp" class="span3"/>
+        <left-side
+          :departments="departments"
+          @levelUp="levelUp"
+          class="span3"
+        />
         <right-side
           :employees="employees"
           :department="department"
@@ -19,16 +23,10 @@ import LeftSide from "@/views/LeftSide.vue";
 import RightSide from "@/views/RightSide.vue";
 // @ts-ignore
 import { useEmployeeStore } from "@/stores/employee";
-import { computed, onMounted } from "vue";
-import type {
-  IEmployees,
-  IEmployeeStore,
-  IDepartment,
-  IDepartmentStore,
-  // @ts-ignore
-} from "@/utils";
 // @ts-ignore
 import { useDepartmentStore } from "@/stores/department";
+// @ts-ignore
+import { useBaseDepartments } from "@/hooks/useBaseDepartments";
 
 export default {
   name: "HomeView",
@@ -36,26 +34,10 @@ export default {
     RightSide,
     LeftSide,
   },
+  mixins: [useBaseDepartments],
   setup() {
-    const employeeStore: IEmployeeStore = useEmployeeStore(),
-      employees: IEmployees = computed(() => employeeStore.employees),
-      departmentStore: IDepartmentStore = useDepartmentStore(),
-      department: IDepartment = computed(() => departmentStore.department),
-      departments = computed(() => departmentStore.departments),
-      count = computed(() => employeeStore.count),
-      fetchParentDepartment = (value: string | null): void => {
-        departmentStore.fetchDepartment(value);
-        departmentStore.fetchDepartments(value);
-        employeeStore.fetchEmployees(value);
-      },
-      levelUp = (): void => {
-        employeeStore.resetEmployees();
-        fetchParentDepartment(department.value.head_office);
-      };
-    console.log(count);
-    onMounted(() => {
-      departmentStore.fetchDepartments();
-    });
+    const { employees, department, departments, levelUp, count } =
+      useBaseDepartments(useEmployeeStore, useDepartmentStore);
     return {
       employees,
       department,

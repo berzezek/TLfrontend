@@ -18,11 +18,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
 // @ts-ignore
-import type { IDepartment } from "@/utils";
+import type { IDepartment } from "@/types";
 
-export default defineComponent({
+export default {
   name: "DepartmentDetail",
   props: {
     departmentTitle: {
@@ -35,7 +34,7 @@ export default defineComponent({
     },
   },
   emits: ["changeDepartment", "removeDepartment"],
-  setup(props, { emit }) {
+  setup(props: any, { emit }: any) {
     const changeDepartment = (id: string): void => {
       emit("changeDepartment", id);
     };
@@ -47,7 +46,7 @@ export default defineComponent({
       removeDepartment,
     };
   },
-});
+};
 </script>
 
 <style scoped>

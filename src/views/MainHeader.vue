@@ -25,8 +25,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-export default defineComponent({
+export default {
   name: "MainHeader",
   setup() {
     const menu = [
@@ -51,7 +50,7 @@ export default defineComponent({
       menu,
     };
   },
-});
+};
 </script>
 
 <style scoped></style>

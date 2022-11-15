@@ -19,7 +19,7 @@
 <script lang="ts">
 import DepartmentOption from "@/components/department/DepartmentOption.vue";
 // @ts-ignore
-import type { IDepartment } from "@/utils";
+import type { IDepartment } from "@/types";
 
 export default {
   name: "ParentDepartment",

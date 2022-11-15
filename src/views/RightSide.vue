@@ -6,7 +6,7 @@
           :department="department"
           :employeesCount="employeesCount"
         />
-        <employee-table :employees="employees" :id="department.id"/>
+        <employee-table :employees="employees" :id="department.id" />
       </div>
     </div>
     <div v-else class="block-in-center">
@@ -19,14 +19,14 @@
 import EmployeeTable from "@/components/employee/EmployeeTable.vue";
 import ParentDepartment from "@/components/department/ParentDepartment.vue";
 // @ts-ignore
-import type { IEmployee, IDepartment } from "@/utils";
+import type { IEmployees, IDepartment } from "@/types";
 
 export default {
   name: "RightSide",
   components: { ParentDepartment, EmployeeTable },
   props: {
     employees: {
-      type: [] as IEmployee[],
+      type: Array as IEmployees,
       required: true,
     },
     department: {
@@ -41,9 +41,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.observer {
-  height: 30px;
-  background-color: #5bb75b;
-}
-</style>
+<style scoped></style>
