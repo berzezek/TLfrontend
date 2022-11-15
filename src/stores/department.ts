@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 // @ts-ignore
-import type { IDepartment, IDepartmentStore } from "@/utils";
+import type { IDepartment, IDepartmentStore } from "@/types";
 
 export const useDepartmentStore = defineStore(
   "department",

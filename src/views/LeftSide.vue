@@ -1,11 +1,15 @@
 <template>
   <div>
-    <base-departments :departments="departments" @levelUp="levelUp" />
+    <base-departments
+      :departments="departments"
+      @levelUp="levelUp"
+      :className="'department-options-hover'"
+    />
   </div>
 </template>
 
 <script>
-import BaseDepartments from "@/components/department/BaseDepartaments.vue";
+import BaseDepartments from "@/components/department/ChildDepatments.vue";
 export default {
   name: "LeftSide",
   components: { BaseDepartments },

@@ -4,7 +4,7 @@ export interface IDepartment {
   head_office: string | null;
 }
 export interface IDepartments {
-  departments: IDepartment[];
+  departments: Array<IDepartment>;
 }
 export interface IEmployee {
   id: number;
@@ -17,16 +17,16 @@ export interface IEmployees {
   count: number;
   next: string | null;
   previous: string | null;
-  results: IEmployee[];
+  results: Array<IEmployee>;
 }
 export interface IDepartmentStore {
-  fetchDepartments: (value: string) => Promise<void>;
-  fetchDepartment: (value: string) => Promise<void>;
+  fetchDepartments: (value: string | null) => Promise<void>;
+  fetchDepartment: (value: string | null) => Promise<void>;
   department: IDepartment;
   departments: Array<IDepartment>;
 }
 export interface IEmployeeStore {
-  fetchEmployees: (value: string) => Promise<void>;
+  fetchEmployees: (value: string | null) => Promise<void>;
   resetEmployees: () => void;
   employees: Array<IEmployee>;
 }

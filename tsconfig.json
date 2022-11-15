@@ -1,6 +1,12 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+  ],
   "exclude": ["node_modules", "dist", "public", "src/**/*.spec.ts"],
   "files": ["src/main.ts", "src/shims-tsx.d.ts", "src/shims-vue.d.ts", "src/shims.d.ts"],
   "compilerOptions": {
@@ -10,7 +16,7 @@
     "moduleResolution": "node",
     "baseUrl": "http://localhost:8000/",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"]
     }
   },
 

@@ -19,7 +19,7 @@
           </tr>
         </tbody>
       </table>
-      <div class="observer" ref="observer"></div>
+      <div class="observer" ref="pagination"></div>
     </div>
     <div v-else class="block-in-center">
       <h2>В выбранной категории нет работников</h2>
@@ -29,61 +29,39 @@
 
 <script lang="ts">
 // @ts-ignore
-import type { IEmployees } from "@/utils";
-import { computed, onMounted, onUnmounted, ref } from "vue";
-import {useEmployeeStore} from "@/stores/employee";
+import type { IEmployees, IEmployeeStore } from "@/types";
+import { ref } from "vue";
+// @ts-ignore
+import { useEmployeeStore } from "@/stores/employee";
+// @ts-ignore
+import { useDynamicPagination } from "@/hooks/useDynamicPagination";
 
 export default {
   name: "EmployeeTable",
-  // props: {
-  //   employees: {
-  //     type: Array as IEmployees,
-  //     required: true,
-  //   },
-  // },
   props: {
+    employees: {
+      type: [Array, []] as IEmployees,
+      required: true,
+    },
     id: {
-      type: String,
+      type: [String, Number],
       required: true,
     },
   },
-  setup(props) {
-    const observer = ref<IntersectionObserver | null>(null),
-      employeeStore = useEmployeeStore(),
-      employees = computed(() => employeeStore.employees);
-
-    onMounted(() => {
-      const options = {
-        root: null,
-        rootMargin: "0px",
-        threshold: 1.0,
-      };
-
-      observer.value = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            employeeStore.fetchEmployees(props.id);
-            console.log("fetch");
-          }
-        });
-      }, options);
-
-      if (observer.value && observer.value.observe) {
-        observer.value.observe(document.querySelector(".observer") as Element);
-      }
-    });
+  setup(props: any) {
+    const paginationBlock = ref<HTMLElement | null>(null),
+      employeeStore: IEmployeeStore = useEmployeeStore(),
+      { pagination } = useDynamicPagination(
+        employeeStore,
+        paginationBlock,
+        props.id
+      );
 
     return {
-      employees,
+      pagination,
     };
   },
 };
 </script>
 
-<style scoped>
-.observer {
-  margin-top: 1000px;
-  height: 30px;
-  background-color: #5bb75b;
-}
-</style>
+<style scoped></style>

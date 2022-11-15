@@ -7,7 +7,7 @@
         <li v-for="department in departments" :key="department.id">
           <department-option
             :department="department"
-            :className="'department-options-hover'"
+            :className="'department-child'"
             @fetchDetails="fetchParentDepartment"
           />
         </li>
@@ -27,12 +27,12 @@
 <script lang="ts">
 // @ts-ignore
 import { useDepartmentStore } from "@/stores/department";
-import DepartmentOption from "@/components/department/DepartmentOption.vue";
 // @ts-ignore
-import type { IDepartmentStore, IDepartments } from "@/utils";
-import { computed } from "vue";
+import type { IDepartmentStore, IDepartments, IEmployeeStore } from "@/types";
 // @ts-ignore
 import { useEmployeeStore } from "@/stores/employee";
+import DepartmentOption from "@/components/department/DepartmentOption.vue";
+import { computed } from "vue";
 
 export default {
   name: "BaseDepartments",
@@ -43,10 +43,9 @@ export default {
       required: true,
     },
   },
-  // @ts-ignore
-  setup(props, { emit }) {
+  setup(props: any, { emit }: any) {
     const departmentStore: IDepartmentStore = useDepartmentStore(),
-      employeeStore = useEmployeeStore(),
+      employeeStore: IEmployeeStore = useEmployeeStore(),
       fetchParentDepartment = (value: string | null): void => {
         employeeStore.resetEmployees();
         departmentStore.fetchDepartment(value);
